@@ -1,0 +1,38 @@
+<?php
+$this->layout('layout::default', [
+    'pageTitle' => $pageTitle ?? 'Page',
+    'currentRole' => $currentRole ?? 'guest',
+]);
+?>
+
+<div class="card">
+    <div class="card-header">
+        <h1 class="card-title mb-0"><?= $this->escapeHtml($pageTitle) ?></h1>
+    </div>
+    <div class="card-body">
+        <p class="lead"><?= $this->escapeHtml($pageDescription) ?></p>
+
+        <hr>
+
+        <h5>Page Information</h5>
+        <dl class="row">
+            <dt class="col-sm-3">Page Name:</dt>
+            <dd class="col-sm-9"><code><?= $this->escapeHtml($pageName) ?></code></dd>
+
+            <dt class="col-sm-3">Route Name:</dt>
+            <dd class="col-sm-9"><code><?= $this->escapeHtml($pageName) ?></code></dd>
+
+            <dt class="col-sm-3">Current URL:</dt>
+            <dd class="col-sm-9"><code><?= $this->escapeHtml($_SERVER['REQUEST_URI'] ?? '/') ?></code></dd>
+        </dl>
+
+        <div class="alert alert-info mt-4">
+            <h6 class="alert-heading">Laminas Navigation Demo</h6>
+            <p class="mb-0">
+                This page demonstrates Laminas Navigation integration with Mezzio.
+                Notice how the sidebar navigation shows the current page as active,
+                and the breadcrumb trail updates automatically.
+            </p>
+        </div>
+    </div>
+</div>

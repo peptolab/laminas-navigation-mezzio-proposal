@@ -8,7 +8,9 @@ use Mezzio\Handler\NotFoundHandler;
 use Mezzio\Helper\ServerUrlMiddleware;
 use Mezzio\Helper\UrlHelperMiddleware;
 use Mezzio\MiddlewareFactory;
+use Mezzio\Session\SessionMiddleware;
 use App\Middleware\NavigationMiddleware;
+use App\Middleware\RoleMiddleware;
 use Mezzio\Router\Middleware\DispatchMiddleware;
 use Mezzio\Router\Middleware\ImplicitHeadMiddleware;
 use Mezzio\Router\Middleware\ImplicitOptionsMiddleware;
@@ -61,7 +63,13 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
     // Seed the UrlHelper with the routing results:
     $app->pipe(UrlHelperMiddleware::class);
 
-    // Navigation middleware - injects navigation and ACL into views
+    // Session middleware
+    $app->pipe(SessionMiddleware::class);
+
+    // Demo middleware to set role from session (can be changed via ?role= query param)
+    $app->pipe(RoleMiddleware::class);
+
+    // Navigation middleware - configures Route page type for Mezzio
     $app->pipe(NavigationMiddleware::class);
 
     // Register the dispatch middleware in the middleware pipeline

@@ -59,7 +59,9 @@
         "mezzio/mezzio": "^3.23.1",
         "mezzio/mezzio-fastroute": "^3.11.0",
         "mezzio/mezzio-helpers": "^5.20",
-        "mezzio/mezzio-laminasviewrenderer": "^2.19"
+        "mezzio/mezzio-laminasviewrenderer": "^2.19",
+        "mezzio/mezzio-session": "^1.17",
+        "mezzio/mezzio-session-ext": "^1.21"
     },
     "require-dev": {
         "laminas/laminas-coding-standard": "^3.1.0",

@@ -1,0 +1,23 @@
+<?php
+/**
+ * @var string $resource
+ * @var string|null $privilege
+ * @var string $role
+ */
+?>
+<div class="card border-danger">
+    <div class="card-header bg-danger text-white">
+        <h1 class="card-title mb-0">403 Forbidden</h1>
+    </div>
+    <div class="card-body">
+        <p class="lead">You do not have permission to access this page.</p>
+        <hr>
+        <p class="mb-0">
+            <strong>Your role:</strong> <?= $this->escapeHtml($role) ?><br>
+            <strong>Required resource:</strong> <?= $this->escapeHtml($resource) ?>
+            <?php if ($privilege): ?>
+                <br><strong>Required privilege:</strong> <?= $this->escapeHtml($privilege) ?>
+            <?php endif; ?>
+        </p>
+    </div>
+</div>

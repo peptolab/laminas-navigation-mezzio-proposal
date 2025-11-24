@@ -1,0 +1,8 @@
+<?php $this->layout('layout::default', ['pageTitle' => 'Error']); ?>
+
+<div class="alert alert-danger">
+    <h4 class="alert-heading">An Error Occurred</h4>
+    <p><?= $this->escapeHtml($message ?? 'An unexpected error occurred.') ?></p>
+    <hr>
+    <p class="mb-0"><a href="/" class="alert-link">Return to Home</a></p>
+</div>

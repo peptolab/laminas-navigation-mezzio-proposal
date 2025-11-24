@@ -110,6 +110,10 @@
             "Composer\\Config::disableProcessTimeout",
             "php -S 0.0.0.0:8080 -t public/"
         ],
+        "start": [
+            "@composer install --no-interaction",
+            "@serve"
+        ],
         "static-analysis": "psalm --stats",
         "static-analysis-update-baseline": "psalm --stats --update-baseline",
         "test": "phpunit --colors=always",

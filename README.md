@@ -9,8 +9,7 @@ This demo shows how to integrate Laminas Navigation with a Mezzio application, i
 ## Quick Start
 
 ```bash
-composer install
-php -S localhost:8080 -t public
+composer start
 ```
 
 Visit http://localhost:8080 and use the role switcher to see ACL filtering in action.

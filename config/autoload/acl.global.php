@@ -2,16 +2,12 @@
 
 declare(strict_types=1);
 
-/**
- * ACL Configuration for Laminas Permissions ACL
- * Demonstrates role-based access control for navigation items
- */
 return [
     'acl' => [
-        'roles' => [
-            'guest' => null,
+        'roles'     => [
+            'guest'  => null,
             'member' => 'guest',
-            'admin' => 'member',
+            'admin'  => 'member',
         ],
         'resources' => [
             'page:home',
@@ -27,8 +23,7 @@ return [
             'page:community',
             'page:admin',
         ],
-        'allow' => [
-            // Guest can access public pages
+        'allow'     => [
             ['guest', 'page:home', null],
             ['guest', 'page:products', null],
             ['guest', 'page:products.servers', null],
@@ -39,11 +34,9 @@ return [
             ['guest', 'page:company.about', null],
             ['guest', 'page:company.careers', null],
             ['guest', 'page:community', null],
-            // Members can view investor information
             ['member', 'page:company.investors', 'view'],
-            // Admin can access admin section
             ['admin', 'page:admin', 'access'],
         ],
-        'deny' => [],
+        'deny'      => [],
     ],
 ];

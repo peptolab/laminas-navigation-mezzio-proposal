@@ -1,0 +1,67 @@
+.sidebar {
+    min-height: calc(100vh - 56px);
+    background-color: #f8f9fa;
+    border-right: 1px solid #dee2e6;
+}
+
+.sidebar a {
+    color: #333;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    margin: 2px 0;
+    display: block;
+    text-decoration: none;
+}
+
+.sidebar a:hover {
+    background-color: #e9ecef;
+}
+
+.sidebar li.active > a {
+    background-color: #0d6efd;
+    color: white;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+.sidebar ul ul {
+    padding-left: 1rem;
+}
+
+.sidebar ul ul a {
+    font-size: 0.9rem;
+}
+
+.sidebar ul ul ul a {
+    font-size: 0.85rem;
+}
+
+.nav-section {
+    margin-bottom: 1rem;
+}
+
+.nav-section-title {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: #6c757d;
+    padding: 0.5rem 1rem;
+    font-weight: bold;
+}
+
+.breadcrumb-container {
+    background-color: #f8f9fa;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
+    border-radius: 0.25rem;
+}
+
+.role-switcher {
+    background-color: #e9ecef;
+    padding: 1rem;
+    border-radius: 0.25rem;
+    margin-bottom: 1rem;
+}

@@ -15,22 +15,15 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-/**
- * Demo middleware that manages user role via session
- *
- * - Reads role from session
- * - Allows changing role via ?role= query parameter (persists to session)
- * - Configures navigation view helper with ACL
- *
- * In a real application, the role would come from authentication
- */
+use function in_array;
+
 class RoleMiddleware implements MiddlewareInterface
 {
     public const ROLE_ATTRIBUTE = 'user_role';
-    private const SESSION_KEY = 'user_role';
+    private const SESSION_KEY   = 'user_role';
 
     private const ALLOWED_ROLES = ['guest', 'member', 'admin'];
-    private const DEFAULT_ROLE = 'guest';
+    private const DEFAULT_ROLE  = 'guest';
 
     public function __construct(
         private readonly TemplateRendererInterface $template,
@@ -44,32 +37,26 @@ class RoleMiddleware implements MiddlewareInterface
         /** @var SessionInterface $session */
         $session = $request->getAttribute(SessionMiddleware::SESSION_ATTRIBUTE);
 
-        // Check if role is being changed via query parameter
         $queryRole = $request->getQueryParams()['role'] ?? null;
 
         if ($queryRole !== null && in_array($queryRole, self::ALLOWED_ROLES, true)) {
-            // Update session with new role
             $session->set(self::SESSION_KEY, $queryRole);
             $role = $queryRole;
         } else {
-            // Get role from session, default to guest
             $role = $session->get(self::SESSION_KEY, self::DEFAULT_ROLE);
 
-            // Validate stored role
-            if (!in_array($role, self::ALLOWED_ROLES, true)) {
+            if (! in_array($role, self::ALLOWED_ROLES, true)) {
                 $role = self::DEFAULT_ROLE;
                 $session->set(self::SESSION_KEY, $role);
             }
         }
 
-        // Make role available to all templates
         $this->template->addDefaultParam(
             TemplateRendererInterface::TEMPLATE_ALL,
             'role',
             $role
         );
 
-        // Configure navigation view helper with ACL and role
         /** @var NavigationHelper $navigationHelper */
         $navigationHelper = $this->viewHelpers->get('navigation');
         $navigationHelper->setAcl($this->acl);

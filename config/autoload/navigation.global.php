@@ -2,41 +2,37 @@
 
 declare(strict_types=1);
 
-/**
- * Navigation configuration for Laminas Navigation
- * Demo configuration based on https://docs.laminas.dev/laminas-navigation/containers/
- */
 return [
     'navigation' => [
         'default' => [
             [
-                'label' => 'Home',
-                'route' => 'home',
+                'label'    => 'Home',
+                'route'    => 'home',
                 'resource' => 'page:home',
             ],
             [
-                'label' => 'Products',
-                'route' => 'products',
+                'label'    => 'Products',
+                'route'    => 'products',
                 'resource' => 'page:products',
-                'pages' => [
+                'pages'    => [
                     [
-                        'label' => 'Servers',
-                        'route' => 'products.servers',
+                        'label'    => 'Servers',
+                        'route'    => 'products.servers',
                         'resource' => 'page:products.servers',
                     ],
                     [
-                        'label' => 'Software',
-                        'route' => 'products.software',
+                        'label'    => 'Software',
+                        'route'    => 'products.software',
                         'resource' => 'page:products.software',
-                        'pages' => [
+                        'pages'    => [
                             [
-                                'label' => 'Enterprise',
-                                'route' => 'products.software.enterprise',
+                                'label'    => 'Enterprise',
+                                'route'    => 'products.software.enterprise',
                                 'resource' => 'page:products.software.enterprise',
                             ],
                             [
-                                'label' => 'Consumer',
-                                'route' => 'products.software.consumer',
+                                'label'    => 'Consumer',
+                                'route'    => 'products.software.consumer',
                                 'resource' => 'page:products.software.consumer',
                             ],
                         ],
@@ -44,37 +40,37 @@ return [
                 ],
             ],
             [
-                'label' => 'Company',
-                'route' => 'company',
+                'label'    => 'Company',
+                'route'    => 'company',
                 'resource' => 'page:company',
-                'pages' => [
+                'pages'    => [
                     [
-                        'label' => 'About Us',
-                        'route' => 'company.about',
+                        'label'    => 'About Us',
+                        'route'    => 'company.about',
                         'resource' => 'page:company.about',
                     ],
                     [
-                        'label' => 'Careers',
-                        'route' => 'company.careers',
+                        'label'    => 'Careers',
+                        'route'    => 'company.careers',
                         'resource' => 'page:company.careers',
                     ],
                     [
-                        'label' => 'Investors',
-                        'route' => 'company.investors',
-                        'resource' => 'page:company.investors',
+                        'label'     => 'Investors',
+                        'route'     => 'company.investors',
+                        'resource'  => 'page:company.investors',
                         'privilege' => 'view',
                     ],
                 ],
             ],
             [
-                'label' => 'Community',
-                'route' => 'community',
+                'label'    => 'Community',
+                'route'    => 'community',
                 'resource' => 'page:community',
             ],
             [
-                'label' => 'Admin',
-                'route' => 'admin',
-                'resource' => 'page:admin',
+                'label'     => 'Admin',
+                'route'     => 'admin',
+                'resource'  => 'page:admin',
                 'privilege' => 'access',
             ],
         ],

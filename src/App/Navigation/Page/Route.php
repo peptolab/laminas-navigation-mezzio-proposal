@@ -12,7 +12,7 @@ use Mezzio\Router\RouterInterface;
 use function array_intersect_assoc;
 use function array_merge;
 use function count;
-use function is_string;
+use function http_build_query;
 
 /**
  * Represents a page defined using a Mezzio route name and route params
@@ -69,15 +69,17 @@ class Route extends AbstractPage
      * Returns whether page should be considered active or not
      *
      * Compares the page's route and params against the RouteResult.
+     *
+     * @param bool $recursive
      */
     public function isActive($recursive = false): bool
     {
-        if (!$this->active) {
+        if (! $this->active) {
             $routeResult = $this->routeResult ?? static::$defaultRouteResult;
 
             if ($routeResult instanceof RouteResult && $routeResult->isSuccess()) {
                 $matchedRouteName = $routeResult->getMatchedRouteName();
-                $matchedParams = $routeResult->getMatchedParams();
+                $matchedParams    = $routeResult->getMatchedParams();
 
                 // Check if route name matches
                 if ($this->getRoute() === $matchedRouteName) {
@@ -104,7 +106,7 @@ class Route extends AbstractPage
      *
      * Uses RouterInterface to assemble the href based on route and params.
      *
-     * @throws Exception\DomainException If no router is set
+     * @throws Exception\DomainException If no router is set.
      */
     public function getHref(): string
     {
@@ -114,7 +116,7 @@ class Route extends AbstractPage
 
         $router = $this->router ?? static::$defaultRouter;
 
-        if (!$router instanceof RouterInterface) {
+        if (! $router instanceof RouterInterface) {
             throw new Exception\DomainException(
                 __METHOD__ . ' cannot execute as no Mezzio\Router\RouterInterface instance is composed'
             );
@@ -131,7 +133,7 @@ class Route extends AbstractPage
         $uri = $router->generateUri($route, $this->getParams());
 
         // Add query string if present
-        if ($this->query !== null && !empty($this->query)) {
+        if ($this->query !== null && ! empty($this->query)) {
             $uri .= '?' . http_build_query($this->query);
         }
 
@@ -147,7 +149,7 @@ class Route extends AbstractPage
     /**
      * Sets route name to use when assembling URL
      *
-     * @throws Exception\InvalidArgumentException If invalid route name is given
+     * @throws Exception\InvalidArgumentException If invalid route name is given.
      */
     public function setRoute(?string $route): self
     {
@@ -157,7 +159,7 @@ class Route extends AbstractPage
             );
         }
 
-        $this->route = $route;
+        $this->route     = $route;
         $this->hrefCache = null;
 
         return $this;
@@ -178,7 +180,7 @@ class Route extends AbstractPage
      */
     public function setParams(?array $params = null): self
     {
-        $this->params = $params ?? [];
+        $this->params    = $params ?? [];
         $this->hrefCache = null;
 
         return $this;
@@ -201,7 +203,7 @@ class Route extends AbstractPage
      */
     public function setQuery(?array $query): self
     {
-        $this->query = $query;
+        $this->query     = $query;
         $this->hrefCache = null;
 
         return $this;
@@ -240,7 +242,7 @@ class Route extends AbstractPage
      */
     public function setRouter(?RouterInterface $router): self
     {
-        $this->router = $router;
+        $this->router    = $router;
         $this->hrefCache = null;
 
         return $this;

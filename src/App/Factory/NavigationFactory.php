@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace App\Factory;
 
+use Exception;
 use Laminas\Navigation\Navigation;
-use Laminas\Permissions\Acl\Acl;
 use Mezzio\Router\RouterInterface;
 use Psr\Container\ContainerInterface;
+
+use function is_array;
 
 class NavigationFactory
 {
@@ -16,7 +18,6 @@ class NavigationFactory
         $config = $container->get('config')['navigation']['default'] ?? [];
         $router = $container->get(RouterInterface::class);
 
-        // Process the config to convert route names to URIs
         $pages = $this->processPages($config, $router);
 
         return new Navigation($pages);
@@ -30,7 +31,7 @@ class NavigationFactory
             if (isset($page['route'])) {
                 try {
                     $page['uri'] = $router->generateUri($page['route']);
-                } catch (\Exception $e) {
+                } catch (Exception $e) {
                     $page['uri'] = '#';
                 }
             }

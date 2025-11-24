@@ -27,17 +27,16 @@ class PageHandler implements RequestHandlerInterface
 
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        // Check ACL if resource is defined
         if ($this->resource !== null) {
             $role = $request->getAttribute(RoleMiddleware::ROLE_ATTRIBUTE, 'guest');
 
-            if (!$this->acl->isAllowed($role, $this->resource, $this->privilege)) {
+            if (! $this->acl->isAllowed($role, $this->resource, $this->privilege)) {
                 return new HtmlResponse(
                     $this->template->render('error::403', [
                         'pageTitle' => '403 Forbidden',
-                        'resource' => $this->resource,
+                        'resource'  => $this->resource,
                         'privilege' => $this->privilege,
-                        'role' => $role,
+                        'role'      => $role,
                     ]),
                     403
                 );
@@ -45,8 +44,8 @@ class PageHandler implements RequestHandlerInterface
         }
 
         return new HtmlResponse($this->template->render('app::page', [
-            'pageName' => $this->pageName,
-            'pageTitle' => $this->pageTitle,
+            'pageName'        => $this->pageName,
+            'pageTitle'       => $this->pageTitle,
             'pageDescription' => $this->pageDescription,
         ]));
     }
